@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        html {
+            font-size: 40px;
+        }
+        
+        body {
+            height: 500rem;
+        }
+        
+        .flag {
+            position: fixed;
+            height: 1rem;
+            width: 1rem;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            background: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flag">
+        ↑
+    </div>
+
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.js"></script>
+<script>
+    scrollTop(".flag")
+
+    function scrollTop(box) {
+        var stratTime,
+            startY,
+            offsetY;
+
+        // 手指按下的处理事件
+        var startHandler = function(e) {
+            //记录手指按下的坐标
+            startY = e.touches[0].pageY;
+            // 清除偏移量
+            offsetY = 0;
+
+        };
+
+        //手指一动的处理事件
+        var moveHandler = function(e) {
+            //兼容chrome android，阻止浏览器默认行为
+            e.preventDefault();
+
+            // 计算手指的偏移量
+            offsetY = e.touches[0].pageY - startY;
+            console.log(offsetY)
+            offsetY > 0 ? $(box).show() : $(box).hide();
+        };
+
+        //手指抬起的处理事件
+        var endHandler = function(e) {
+            //   e.preventDefault();
+
+
+        };
+
+        var body = document.querySelector("body")
+        body.addEventListener('touchstart', startHandler);
+        body.addEventListener('touchmove', moveHandler);
+        body.addEventListener('touchend', endHandler);
+    }
+</script>
+
+</html>
